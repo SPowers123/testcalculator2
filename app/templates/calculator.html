@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Calculator{% endblock %}
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important {
+            color: #336699;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+
+    <h1>Calculator</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-danger ms-3 me-3" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form action="/calculator" method="post">
+        <label for="values">Values <i>(comma-seperated, no spaces)</i>:</label><br>
+        <input type="text" id="values" name="values" value=""><br><br>
+        <fieldset>
+        <legend>Operation</legend>
+          <div>
+            <input type="radio" name="operation" id="addition" value="add_numbers" checked>
+            <label for="addition">addition</label>
+          </div>
+          <div>
+            <input type="radio" name="operation" id="subtraction" value="subtract_numbers">
+            <label for="subtraction">subtraction</label>
+          </div>
+          <div>
+            <input type="radio" name="operation" id="multiplication" value="multiply_numbers">
+            <label for="multiplication">multiplication</label>
+          </div>
+            <div>
+            <input type="radio" name="operation" id="division" value="divide_numbers">
+            <label for="division">division</label>
+          </div>
+        </fieldset>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
